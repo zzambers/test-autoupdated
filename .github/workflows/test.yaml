@@ -7,6 +7,8 @@ on:
   push:
     branches:
       - "*"
+    tags:
+      - "*"
 
 jobs:
   test-auto:
@@ -16,4 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run
-        run: git branch
+        run: |
+          printf 'GITHUB_EVENT_NAME: %s\n' "${GITHUB_EVENT_NAME}"
+          printf 'GITHUB_SHA: %s\n' "${GITHUB_SHA}"
+          printf 'GITHUB_REF: %s\n' "${GITHUB_REF}"
